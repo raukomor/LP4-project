@@ -1,3 +1,3 @@
 <?php
-    echo "beggin";
+    echo "begin";
 ?>
