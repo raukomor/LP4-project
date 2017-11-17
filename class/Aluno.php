@@ -1,4 +1,6 @@
 <?php
+    require_once("class/Sql.php");
+    
     class Aluno{
         private $codigo;
         private $nome;
@@ -7,19 +9,19 @@
 
         //construtor
 
-        public function __construct(/*$codigo,*/ $nome, $dataNascimento, $endereco){
-            $this->codigo = 0;
-            $this->nome = $nome;
-            $this->dataNascimento = $dataNascimento;
-            $this->endereco = $endereco;
-        }
+        // public function __construct(/*$codigo,*/ $nome, $dataNascimento, $endereco){
+        //     $this->codigo = 0;
+        //     $this->nome = $nome;
+        //     $this->dataNascimento = $dataNascimento;
+        //     $this->endereco = $endereco;
+        // }
         
         public function getCodigo(){
             return $this->codigo;
         }
 
-        public function setCodigo(){
-            // diferenciado
+        public function setCodigo($value){
+            $this->codigo = $value;
         }
         
         public function getNome(){
@@ -57,12 +59,34 @@
 
         //quando der echo no objeto, vai retorna esse metodo
         public function __toString(){
-            return $this->nome.", ".$this->dataNascimento.", ".$this->endereco;
+            return json_encode(array(
+                "cdAluno"=>$this->getCodigo(),
+                "nmAluno"=>$this->getNome(),
+                "nmEndereco"=>$this->getEndereco()
+            ));
+                
+                
+                //$this->nome.", ".$this->dataNascimento.", ".$this->endereco;
         }
 
         // retirar objeto da memoria no final da execução(exibição de uma mensagem)
         public function __destruct(){
             var_dump("DESTRUIR");
+        }
+
+        public function loadById($id){
+            $sql = new Sql();
+            $results = $sql->select("SELECT * FROM aluno WHERE cdAluno = :ID", array(
+                ":ID"=>$id
+            ));
+    
+            if(count($results) > 0){
+                $row = $results[0];
+    
+                $this->setCodigo($row['cdAluno']);
+                $this->setNome($row['nmAluno']);
+                $this->setEndereco($row['nmEndereco']);
+            }
         }
     }
 
@@ -72,12 +96,5 @@
 
     // }
 
-    $novoAluno = new Aluno("Rodrigo","26/09/1997","Rua são Caetano");
-    // $batata->setNome("Rodrigo");
-    // $batata->setEndereco("Rua Batata");
-    // $batata->setDataNascimento("26/09/2017");
     
-    var_dump($novoAluno->exibir());
-    echo $novoAluno;
-    unset($novoAluno);
 ?>
