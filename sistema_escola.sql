@@ -17,8 +17,9 @@ CREATE TABLE TURMA(
 cd_turma INTEGER PRIMARY KEY auto_increment,
 nm_periodo_turma VARCHAR(10) NOT NULL,
 sg_sala_turma CHAR(5) NOT NULL,
-aa_escolar_turma INT(1) NOT NULL,
-cd_escola INTEGER NOT NULL);
+cd_serie_turma INT(1) NOT NULL,
+cd_escola INTEGER NOT NULL,
+CONSTRAINT FK_turma_escola FOREIGN KEY(cd_escola) REFERENCES ESCOLA (cd_escola));
 
 CREATE TABLE PROFESSOR_ESCOLA(
 cd_ingrecao INTEGER PRIMARY KEY auto_increment,
