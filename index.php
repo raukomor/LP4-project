@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+
 <body>
     <?php
-        // session_id("sivkqlhd372lsosfmogptbmok7");
-        // var_dump(session_save_path());
         require_once("config.php");
+        
         //session_regenerate_id();
         //echo session_id();
         // var_dump(session_status());
@@ -37,10 +38,15 @@
         // echo json_encode($search);
 
         //carregar um aluno usando login e senha
-        $aluno = new Aluno("",0);
-        $aluno->login("rodrigo",123);
-        var_dump($aluno->getNome());
-        echo $aluno;
+        // $escola = new Escola();
+        // $escola->loadById(3);
+        // $escola->delete();
+        //$tt = json_decode($batata);
+        //echo $batata->;
+        //$escola = new Escola("FATEC","praca 19 de janeiro",34343434);
+        //$escola->insert();
+        //var_dump($aluno->getNome());
+        //echo $escola;
         //Inserir novo aluno
         // $aluno = new Aluno("Ronaldo",123123);
         // $aluno->insert();
@@ -69,6 +75,7 @@
         // echo ucwords(strftime("%A %B"));
 
     ?>
+    
 </body>
 </html>
 

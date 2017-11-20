@@ -1,83 +1,157 @@
 <?php
     class Escola{
-        private $codigo;
-        private $nome;
-        private $endereco;
-        private $cep;
+        private $cd_escola;
+        private $nm_escola;
+        private $nm_endereco_escola;
+        private $cd_telefone_escola;
 
         //construtor
 
-        public function __construct(/*$codigo,*/ $nome, $cep, $endereco){
-            $this->codigo = 0;
-            $this->nome = $nome;
-            $this->cep = $cep;
-            $this->endereco = $endereco;
+        public function __construct($nm_escola = null,$nm_endereco_escola = null,$cd_telefone_escola = null){
+            $this->cd_escola = null;
+            $this->nm_escola = $nm_escola;
+            $this->nm_endereco_escola = $nm_endereco_escola;
+            $this->cd_telefone_escola = $cd_telefone_escola;
         }
         
-        public function getCodigo(){
-            return $this->codigo;
+        public function getCd_escola(){
+            return $this->cd_escola;
         }
 
-        public function setCodigo(){
-            // diferenciado
+        public function setCd_escola($value){
+            $this->cd_escola = $value;
         }
         
-        public function getNome(){
-            return $this->nome;
+        public function getNm_escola(){
+            return $this->nm_escola;
         }
 
-        public function setNome($nome){
-            $this->nome = $nome;
+        public function setNm_escola($value){
+            $this->nm_escola = $value;
         }
 
-        public function getCep(){
-            return $this->cep;
+        public function getNm_endereco_escola(){
+            return $this->nm_endereco_escola;
         }
 
-        public function setCep($cep){
-            $this->cep = $cep;
+        public function setNm_endereco_escola($value){
+            $this->nm_endereco_escola = $value;
         }
 
-        public function getEndereco(){
-            return $this->endereco;
+        public function getCd_telefone_escola(){
+            return $this->cd_telefone_escola;
         }
 
-        public function setEndereco($endereco){
-            $this->endereco = $endereco;
-        }
-
-        // exemplo de metodo
-        public function exibir(){
-            return array(
-                "nome"=>$this->getNome(),
-                "cep"=>$this->getCep(),
-                "endereco"=>$this->getEndereco()
-            );
+        public function setCd_telefone_escola($value){
+            $this->cd_telefone_escola = $value;
         }
 
         //quando der echo no objeto, vai retorna esse metodo
         public function __toString(){
-            return $this->nome.", ".$this->dataNascimento.", ".$this->endereco;
+            return json_encode(array(
+                "cd_escola"=>$this->getCd_escola(),
+                "nm_escola"=>$this->getNm_escola(),
+                "nm_endereco_escola"=>$this->getNm_endereco_escola(),
+                "cd_telefone_escola"=>$this->getCd_telefone_escola()
+            ));
         }
 
         // retirar objeto da memoria no final da execução(exibição de uma mensagem)
         public function __destruct(){
             var_dump("DESTRUIR");
         }
+
+        public function loadById($id){
+            $sql = new Sql();
+            $results = $sql->select("SELECT * FROM escola WHERE cd_escola = :ID", array(
+                ":ID"=>$id
+            ));
+    
+            if(count($results) > 0){
+                $this->setData($results[0]);
+            }
+        }
+
+        public static function getList(){
+            $sql = new Sql();
+
+            return $sql->select("SELECT * FROM escola ORDER BY nm_escola;");
+        }
+
+        public static function search($nome){
+            $sql = new Sql();
+
+            return $sql->select("SELECT * FROM escola WHERE cd_escola Like :SEARCH ORDER BY nm_escola",array(
+                ":SEARCH"=>"%".$nome."%"
+            ));
+        }
+
+        // public function login($login,$password){
+        //     $sql = new Sql();
+        //     $results = $sql->select("SELECT * FROM aluno WHERE nmAluno = :LOGIN AND cdSenha = :PASSWORD", array(
+        //         ":LOGIN"=>$login,
+        //         ":PASSWORD"=>$password
+        //     ));
+
+        //     if(count($results) > 0){
+        //         $this->setData($results[0]);
+        //         echo "entrou";
+        //     }
+        //     else{
+        //        throw new Exception("Login e/ou senha inválidos"); 
+        //     }
+
+        // }
+        public function setData($data){
+            $this->setCd_escola($data['cd_escola']);           
+            $this->setNm_escola($data['nm_escola']);           
+            $this->setNm_endereco_escola($data['nm_endereco_escola']);           
+            $this->setCd_telefone_escola($data['cd_telefone_escola']);           
+        }
+
+        public function insert(){
+            $sql = new Sql();
+
+            $results = $sql->select("CALL sp_escola_insert(:NM_ESCOLA, :NM_ENDERECO_ESCOLA, :CD_TELEFONE_ESCOLA)", array(
+                ':NM_ESCOLA'=>$this->getNm_escola(),
+                ':NM_ENDERECO_ESCOLA'=>$this->getNm_endereco_escola(),
+                ':CD_TELEFONE_ESCOLA'=>$this->getCd_telefone_escola()
+            ));
+
+            if(count($results) > 0){
+                $this->setData($results[0]);
+            }
+        }
+
+        public function update($nm_escola,$nm_endereco_escola,$cd_telefone_escola){
+            $sql = new Sql();
+            
+            $this->setNm_escola($nm_escola);
+            $this->setNm_endereco_escola($nm_endereco_escola);
+            $this->setCd_telefone_escolaescola($cd_telefone_escola);
+            
+
+            $sql->query("UPDATE escola SET nm_escola = :CD_ESCOLA, nm_endereco_escola = :NM_ENDERECO_ESCOLA, cd_telefone_escola = :CD_TELEFONE_ESCOLA WHERE cd_escola = :CD_ESCOLA", array(
+                ':NM_ESCOLA'=>$this->getNm_escola(),
+                ':NM_ENDERECO_ESCOLA'=>$this->getNm_endereco_escola(),
+                ':CD_TELEFONE_ESCOLA'=>$this->getCd_telefone_escola(),
+                ':CD_ESCOLA'=>$this->getCd_escola()
+            ));
+        }
+
+        public function delete(){
+            $sql = new Sql();
+
+            $sql->query("DELETE FROM escola WHERE cd_escola = :CD_ESCOLA", array(
+                ":CD_ESCOLA"=>$this->getCd_escola()
+            ));
+
+            $this->setCd_escola(0);           
+            $this->setNm_escola("");           
+            $this->setNm_endereco_escola("");           
+            $this->setCd_telefone_escola(null);    
+
+        }
     }
 
-    //--exemplo de herança
-    //--variaveis com protect só pode ser visto por herança e pela propria classe
-    // class Pessoa extends Alunos{
-
-    // }
-
-    $novaEscola = new Escola("Martim Afonso","11340-010","Rua VII");
-     $xyz->setNome("Martim Afonso");
-     $xyz->setCep("11340-010");
-     $xyz->setEndereco("rua VII");
-    
-    var_dump($novaEscola->exibir());
-    echo $novaEscola;
-    unset($novaEscola);
 ?>
