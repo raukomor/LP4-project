@@ -1,51 +1,33 @@
 <?php
-    require_once("class/Sql.php");
     
-    class Aluno{
-        private $codigo;
-        private $nome;
-        private $dataNascimento;
-        private $endereco;
+    
+    class Aluno extends Pessoa{
+        private $ra;
+        //private $nome;
+        //private $dataNascimento;
+        //private $endereco;
+        private $senha;
 
         //construtor
-
-        // public function __construct(/*$codigo,*/ $nome, $dataNascimento, $endereco){
-        //     $this->codigo = 0;
-        //     $this->nome = $nome;
-        //     $this->dataNascimento = $dataNascimento;
-        //     $this->endereco = $endereco;
-        // }
-        
-        public function getCodigo(){
-            return $this->codigo;
-        }
-
-        public function setCodigo($value){
-            $this->codigo = $value;
+        public function __construct($login, $password){
+        $this->setNome($login);
+        $this->setSenha($password);
         }
         
-        public function getNome(){
-            return $this->nome;
+        public function getRA(){
+            return $this->ra;
         }
 
-        public function setNome($nome){
-            $this->nome = $nome;
+        public function setRA($value){
+            $this->ra = $value;
+        }
+        
+        public function getSenha(){
+            return $this->senha;
         }
 
-        public function getDataNascimento(){
-            return $this->dataNascimento;
-        }
-
-        public function setDataNascimento($dataNascimento){
-            $this->dataNascimento = $dataNascimento;
-        }
-
-        public function getEndereco(){
-            return $this->endereco;
-        }
-
-        public function setEndereco($endereco){
-            $this->endereco = $endereco;
+        public function setSenha($senha){
+            $this->senha = $senha;
         }
 
         // exemplo de metodo
@@ -60,9 +42,10 @@
         //quando der echo no objeto, vai retorna esse metodo
         public function __toString(){
             return json_encode(array(
-                "cdAluno"=>$this->getCodigo(),
+                "cdAluno"=>$this->getRA(),
                 "nmAluno"=>$this->getNome(),
-                "nmEndereco"=>$this->getEndereco()
+                "nmEndereco"=>$this->getEndereco(),
+                "cdSenha"=>$this->getSenha(),
             ));
                 
                 
@@ -81,12 +64,90 @@
             ));
     
             if(count($results) > 0){
-                $row = $results[0];
-    
-                $this->setCodigo($row['cdAluno']);
-                $this->setNome($row['nmAluno']);
-                $this->setEndereco($row['nmEndereco']);
+                $this->setData($results[0]);
             }
+        }
+
+        public static function getList(){
+            $sql = new Sql();
+
+            return $sql->select("SELECT * FROM aluno ORDER BY nmAluno;");
+        }
+
+        public static function search($nome){
+            $sql = new Sql();
+
+            return $sql->select("SELECT * FROM aluno WHERE nmAluno Like :SEARCH ORDER BY nmAluno",array(
+                ":SEARCH"=>"%".$nome."%"
+            ));
+        }
+
+        public function login($login,$password){
+            $sql = new Sql();
+            $results = $sql->select("SELECT * FROM aluno WHERE nmAluno = :LOGIN AND cdSenha = :PASSWORD", array(
+                ":LOGIN"=>$login,
+                ":PASSWORD"=>$password
+            ));
+
+            if(count($results) > 0){
+                $this->setData($results[0]);
+                echo "entrou";
+            }
+            else{
+               throw new Exception("Login e/ou senha inválidos"); 
+            }
+
+        }
+        public function setData($data){
+            $this->setRA($data['cdAluno']);
+            $this->setNome($data['nmAluno']);
+            $this->setSobrenome("");
+            $this->setDataNascimento("");
+            $this->setIdade();
+            $this->setEndereco($data['nmEndereco']);
+            $this->setSenha($data['cdSenha']);
+            
+        }
+
+        public function insert(){
+            $sql = new Sql();
+
+            $results = $sql->select("CALL sp_alunos_insert(:LOGIN, :PASSWORD)", array(
+                ':LOGIN'=>$this->getNome(),
+                ':PASSWORD'=>$this->getSenha()
+            ));
+
+            if(count($results) > 0){
+                $this->setData($results[0]);
+            }
+        }
+
+        public function update($login, $password){
+            $sql = new Sql();
+            
+            $this->setNome($login);
+            $this->setSenha($password);
+
+            $sql->query("UPDATE aluno SET nmAluno = :LOGIN, cdSenha = :PASSWORD WHERE cdAluno = :ID", array(
+                ':LOGIN'=>$this->getNome(),
+                ':PASSWORD'=>$this->getSenha(),
+                ':ID'=>$this->getCodigo()
+            ));
+        }
+
+        public function delete(){
+            $sql = new Sql();
+
+            $sql->query("DELETE FROM aluno WHERE cdAluno = :ID", array(
+                ":ID"=>$this->getCodigo()
+            ));
+
+            $this->setCodigo(0);
+            $this->setNome("");
+            $this->setSenha("");
+            $this->setEndereco("");
+            $this->setDataNascimento("");
+
         }
     }
 
