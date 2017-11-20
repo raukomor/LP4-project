@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/services.js" defer="defer"></script>
 </head>
 
 <body>
@@ -45,6 +46,7 @@
         //echo $batata->;
         //$escola = new Escola("FATEC","praca 19 de janeiro",34343434);
         //$escola->insert();
+        //echo $escola;
         //var_dump($aluno->getNome());
         //echo $escola;
         //Inserir novo aluno

@@ -58,7 +58,7 @@
 
         // retirar objeto da memoria no final da execução(exibição de uma mensagem)
         public function __destruct(){
-            var_dump("DESTRUIR");
+            //var_dump("DESTRUIR");
         }
 
         public function loadById($id){
@@ -72,16 +72,16 @@
             }
         }
 
-        public static function getList(){
+        public function getList(){
             $sql = new Sql();
 
             return $sql->select("SELECT * FROM escola ORDER BY nm_escola;");
         }
 
-        public static function search($nome){
+        public function search($nome){
             $sql = new Sql();
 
-            return $sql->select("SELECT * FROM escola WHERE cd_escola Like :SEARCH ORDER BY nm_escola",array(
+            return $sql->select("SELECT * FROM escola WHERE nm_escola Like :SEARCH ORDER BY nm_escola",array(
                 ":SEARCH"=>"%".$nome."%"
             ));
         }
@@ -123,15 +123,18 @@
             }
         }
 
-        public function update($nm_escola,$nm_endereco_escola,$cd_telefone_escola){
+        public function update($cd_escola,$nm_escola,$nm_endereco_escola,$cd_telefone_escola){
             $sql = new Sql();
             
+            $this->loadById($cd_escola);
+
+            //$this->setCd_escola($cd_escola); 
             $this->setNm_escola($nm_escola);
             $this->setNm_endereco_escola($nm_endereco_escola);
-            $this->setCd_telefone_escolaescola($cd_telefone_escola);
+            $this->setCd_telefone_escola($cd_telefone_escola);
             
 
-            $sql->query("UPDATE escola SET nm_escola = :CD_ESCOLA, nm_endereco_escola = :NM_ENDERECO_ESCOLA, cd_telefone_escola = :CD_TELEFONE_ESCOLA WHERE cd_escola = :CD_ESCOLA", array(
+            $sql->query("UPDATE escola SET nm_escola = :NM_ESCOLA, nm_endereco_escola = :NM_ENDERECO_ESCOLA, cd_telefone_escola = :CD_TELEFONE_ESCOLA WHERE cd_escola = :CD_ESCOLA", array(
                 ':NM_ESCOLA'=>$this->getNm_escola(),
                 ':NM_ENDERECO_ESCOLA'=>$this->getNm_endereco_escola(),
                 ':CD_TELEFONE_ESCOLA'=>$this->getCd_telefone_escola(),
@@ -139,8 +142,10 @@
             ));
         }
 
-        public function delete(){
+        public function delete($cd_escola){
             $sql = new Sql();
+            
+            $this->loadById($cd_escola);
 
             $sql->query("DELETE FROM escola WHERE cd_escola = :CD_ESCOLA", array(
                 ":CD_ESCOLA"=>$this->getCd_escola()
