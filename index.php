@@ -124,57 +124,38 @@
     </div>
 
     <footer id="footer">
-        <div class="" style="color: #57A8FF;" > 
+        <div class="" style="color: white;" > 
             <div style="text-align: center;">
                 CADASTRO DE ALUNOS © Copyright 2017 - 2018
                 <br>
-            <table style="float: right;">
-                <tr>
-                    <td>Fabio da Silva Araujo</td>
-                    <td><a href="http://facebook.com/astrofabin">
-                        <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
-                        </a>
-                    </td>
-                    <td><a href="https://www.linkedin.com/in/fabio-a-b44393b9/">
-                        <img src="https://image.freepik.com/icones-gratis/logotipo-linkedin_318-76861.jpg" id="icon">
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jefferson Costa Gomes</td>
-                    <td><a href="http://facebook.com/astrofabin">
+            </div>
+            <!--<div >
+            <div class="row">
+                <div class="col-2">Fabio da Silva Araujo</div>
+                <div class="col"><a href="http://facebook.com/astrofabin">
                     <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
-                    </a>
-                </td>
-                <td><a href="https://www.linkedin.com/in/fabio-a-b44393b9/">
-                    <img src="https://image.freepik.com/icones-gratis/logotipo-linkedin_318-76861.jpg" id="icon">
-                    </a>
-                </td>
-                </tr>
-                <tr>
-                    <td>Rodrigo Corneta</td>
-                    <td><a href="http://facebook.com/astrofabin">
+                    </a></div>
+            </div>
+            <div class="row">
+                <div class="col-2">Jefferson Costa Gomes</div>
+                <div class="col"><a href="http://facebook.com/astrofabin">
                     <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
-                    </a>
-                </td>
-                <td><a href="https://www.linkedin.com/in/fabio-a-b44393b9/">
-                    <img src="https://image.freepik.com/icones-gratis/logotipo-linkedin_318-76861.jpg" id="icon">
-                    </a>
-                </td>
-                </tr>
-                <tr>
-                    <td>Vitor Jesus</td>
-                    <td><a href="http://facebook.com/astrofabin">
+                    </a></div>
+            </div>
+            <div class="row">
+                <div class="col-2">Rodrigo Corneta</div>
+                <div class="col"><a href="http://facebook.com/astrofabin">
                     <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
-                    </a>
-                </td>
-                <td><a href="https://www.linkedin.com/in/fabio-a-b44393b9/">
-                    <img src="https://image.freepik.com/icones-gratis/logotipo-linkedin_318-76861.jpg" id="icon">
-                    </a>
-                </td>
-                </tr>
-            </table></div>
-        </div>
+                    </a></div>
+            </div>
+            <div class="row">
+                <div class="col-2">Vitor Jesus</div>
+                <div class="col"><a href="http://facebook.com/astrofabin">
+                    <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
+                    </a></div>
+            </div>
+            </div>
+        </div>-->
     </footer>
 
 </body>
