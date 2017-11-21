@@ -83,17 +83,16 @@
     <nav class="navbar-dark container-fluid" style="content: '';clear: both; display:table;" id="head" >
         <div style="float:left;
                     color: white;
-                    font-family: Courier;
-                    display:inline;" >
+                    font-family: Courier;">
                     <h1>CAD_UNO</h1>
                     <h6>cadastro de alunos</h6>
         </div>
-        <div style="margin-top:2px;
+        <div class="btn-group" style="margin-top:20px;
                     float:right;
                     color:white;">
-            <a href="#"  class="btn btn-group-lg btn-dark">Ínicio</a>
-            <a href="#"  class="btn btn-group-lg btn-dark">Sobre a Empresa</a>
-            <a href="#"  class="btn btn-group-lg btn-dark">Fale Conosco</a>
+            <a href="cadastroEscola.php"  class="btn btn-group-lg btn-light">Ínicio</a>
+            <a href="#"  class="btn btn-group-lg btn-light">Sobre a Empresa</a>
+            <a href="#"  class="btn btn-group-lg btn-light">Fale Conosco</a>
         </div>
     </nav>
 
