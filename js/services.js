@@ -1,11 +1,11 @@
 //Select na tabela escola com id especifico
-function GetEscolaById(code){
-    var url = "services/escolaService.php";
+function GetEscolaById(formDados){
+    var url = "../services/escolaService.php";
     console.log(url);
     $.ajax({
         method: "POST",
         url: url,
-        data: { relatorioCode: code},
+        data: formDados,//{ relatorioCode: code},
         cache: false,
         dataType: "json",
         beforeSend: function(){
@@ -14,20 +14,58 @@ function GetEscolaById(code){
         error: function(){
             console.log("problema com a fonte de dados");
         },
-        success: function(data){
-            if(data.erro){
-                console.log(data.erro);
-            }else{
-                console.log(data);
+        success: function(data){},         
+        complete: function(data){
+            response = data.responseJSON;
+        }
+    });
+    
+};
+
+//Select na tabela escola para a edição
+function GetEscolaForEdit(formDados){
+    var url = "../services/escolaService.php";
+    console.log(url);
+    $.ajax({
+        method: "POST",
+        url: url,
+        data: formDados,//{ relatorioCode: code},
+        cache: false,
+        dataType: "json",
+        beforeSend: function(){
+            console.log("carregando");
+        },
+        error: function(){
+            console.log("problema com a fonte de dados");
+        },
+        success: function(data){},         
+        complete: function(data){
+            
+            var dados = data.responseJSON; 
+            if(dados.erro){
+                alert(dados.erro);
+            }
+            else{
+                $("#editEscola").css("display", "block");
+                $("#selectEscolaForUpdate").css("display", "none");
+                
+                var formElements = new Array();
+                $("#editEscola :input").each(function(){
+                    formElements.push($(this));
+                });
+                
+                formElements[0].val(dados.nm_escola); 
+                formElements[1].val(dados.nm_endereco_escola); 
+                formElements[2].val(dados.cd_telefone_escola); 
+                formElements[3].val($('#selectEscolaForUpdate').find('#code').val());
             }
         }
-
     });
 };
 
 //Select na tabela escola inteira
 function GetAllEscola(){
-    var url = "services/escolaService.php";
+    var url = "../services/escolaService.php";
     console.log(url);
     $.ajax({
         method: "POST",
@@ -60,7 +98,7 @@ function GetAllEscola(){
 
 //search na tabela escola por nome
 function SearchEscolaByName(name){
-    var url = "services/escolaService.php";
+    var url = "../services/escolaService.php";
     console.log(url);
     $.ajax({
         method: "POST",
@@ -92,20 +130,21 @@ function SearchEscolaByName(name){
 };
 
 //Inserir na tabela escola
-function newEscola(newEscola, name, end, tel){
-    var url = "services/escolaService.php";
+function newEscola(formDados){
+    var url = "../services/escolaService.php";
     console.log(url);
     $.ajax({
         method: "POST",
         url: url,
-        data: { 
+        data: formDados,/*{ 
             newEscola: newEscola, 
             name: name,
             end: end,
             tel: tel
-        },
+        },*/
         cache: false,
         dataType: "json",
+       
         beforeSend: function(){
             console.log("carregando");
         },
@@ -114,30 +153,25 @@ function newEscola(newEscola, name, end, tel){
         },
         success: function(data){
             if(data.erro){
-                console.log(data.erro);
+                alert(data.erro);
             }else{
-                console.log(data.success);
+                alert(data.success);
             }
            
+            $(location).attr('href', '/LP4-project');
         }
 
     });
 };
 
 //Editar Cadastro da tabela escola
-function editEscola(editEscola, code, name, end, tel){
-    var url = "services/escolaService.php";
+function editEscola(formDados){
+    var url = "../services/escolaService.php";
     console.log(url);
     $.ajax({
         method: "POST",
         url: url,
-        data: { 
-            editEscola: editEscola, 
-            code: code,
-            name: name,
-            end: end,
-            tel: tel
-        },
+        data: formDados,
         cache: false,
         dataType: "json",
         beforeSend: function(){
@@ -148,10 +182,12 @@ function editEscola(editEscola, code, name, end, tel){
         },
         success: function(data){
             if(data.erro){
-                console.log(data.erro);
+                alert(data.erro);
             }else{
-                console.log(data.success);
+                alert(data.success);
             }
+           
+            $(location).attr('href', '/LP4-project');
            
         }
 
@@ -159,16 +195,13 @@ function editEscola(editEscola, code, name, end, tel){
 };
 
 //Excluir Cadastro da tabela escola
-function deleteEscola(deleteEscola, code){
-    var url = "services/escolaService.php";
+function deleteEscola(formDados){
+    var url = "../services/escolaService.php";
     console.log(url);
     $.ajax({
         method: "POST",
         url: url,
-        data: { 
-            deleteEscola: deleteEscola, 
-            code: code
-        },
+        data: formDados,
         cache: false,
         dataType: "json",
         beforeSend: function(){
@@ -179,10 +212,12 @@ function deleteEscola(deleteEscola, code){
         },
         success: function(data){
             if(data.erro){
-                console.log(data.erro);
+                alert(data.erro);
             }else{
-                console.log(data.success);
+                alert(data.success);
             }
+           
+            $(location).attr('href', '/LP4-project');
            
         }
 

@@ -2,8 +2,10 @@
 <?php
     require_once("../config.php");
     header('Cache-Control: no-cache, must-revalidate'); 
-    header('Content-Type: application/json; charset=utf-8');
+    //header('Content-Type: application/json; charset=utf-8');
+    //header('Content-Type: text/html; charset=utf-8');
     $escola = new Escola();
+    
     
     // retorna todas as escolas
     if(isset($_POST["relatorio"]) && $_POST["relatorio"]=="all"){
@@ -18,7 +20,7 @@
     // retorna a escola pelo codigo
     if(isset($_POST["relatorioCode"]) && $_POST["relatorioCode"]!=null){
         $escola->loadById($_POST["relatorioCode"]);
-        if( $escola != null){
+        if($escola->getNm_escola() != null){
             echo $escola;
         }
         else{
@@ -71,7 +73,8 @@
         }
     }
     
-    $_POST = array();
+    // $_POST = array();
+    unset($_POST);
 ?>
 
 
