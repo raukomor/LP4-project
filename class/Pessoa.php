@@ -1,82 +1,57 @@
 <?php
     class Pessoa{
-        private $nome;
-        private $sobrenome;
-        private $dataNascimento;
-        private $idade;
-        private $endereco;
+        private $cd_cpf;
+        private $nm_pessoa;
+        private $dt_nascimento;
+        private $nm_endereco;
+        private $cd_telefone;
 
-        // public function __construct($nome,$sobrenome,$dataNascimento){
-        //     $this->nome = $nome;
-        //     $this->sobrenome = $sobrenome;
-        //     $this->dataNascimento = $dataNascimento;
-        //     $this->idade = $this->gerarIdade();
+        
+        
+        public function getCd_cpf(){
+            return $this->cd_cpf;
+        }
+
+        public function setCd_cpf($value){
+            $this->cd_cpf = $value;
+        }
+        
+        public function getNm_pessoa(){
+            return $this->nm_pessoa;
+        }
+
+        public function setNm_pessoa($value){
+            $this->nm_pessoa = $value;
+        }
+        
+        public function getDt_nascimento(){
+            return $this->dt_nascimento;
+        }
+
+        public function setDt_nascimento($value){
+            $this->dt_nascimento = $value;
+        }
+        
+        public function getNm_endereco(){
+            return $this->nm_endereco;
+        }
+
+        public function setNm_endereco($value){
+            $this->nm_endereco = $value;
+        }
+        
+
+        public function getCd_telefone(){
+            return $this->cd_telefone;
+        }
+
+        public function setCd_telefone($value){
+            $this->cd_telefone = $value;
+        }
+        
+        // public function __toString(){
+        //     return $this->nm_pessoa."</br>".$this->nm_sobrenm_pessoa."</br>".$this->dt_nascimento."</br>".$this->ds_idade."</br>";
         // }
-
-        public function getNome(){
-            return $this->nome;
-        }
-
-        public function setNome($value){
-            $this->nome = $value;
-        }
-        
-        public function getSobrenome(){
-            return $this->sobrenome;
-        }
-
-        public function setSobrenome($value){
-            $this->sobrenome = $value;
-        }
-        
-        public function getDataNascimento(){
-            return $this->dataNascimento;
-        }
-
-        public function setDataNascimento($value){
-            $this->dataNascimento = $value;
-        }
-        
-        public function getIdade(){
-            return $this->idade;
-        }
-
-        public function setIdade(){
-            $this->idade = $this->gerarIdade();
-        }
-        
-        public function gerarIdade(){
-            $ti = explode("/", $this->getDataNascimento());
-            //var_dump($ti);
-            if(isset($this->getDataNascimento)){
-                if(date('m') >= $ti[1]){
-                    if(date('d') < $ti[0]){
-                        $inc = date('Y') - $ti[2];
-                        return $inc - 1;
-                    }
-                    else{
-                        return date('Y') - $ti[2];
-                    }
-                }
-                else{
-                    return date('Y') - $ti[2];
-                }
-                //print_r($ti);
-            }
-                
-        }
-
-        public function getEndereco(){
-            return $this->endereco;
-        }
-
-        public function setEndereco($value){
-            $this->endereco = $value;
-        }
-        
-        public function __toString(){
-            return $this->nome."</br>".$this->sobrenome."</br>".$this->dataNascimento."</br>".$this->idade."</br>";
-        }
 
         
     }
