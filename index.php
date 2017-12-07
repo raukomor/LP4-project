@@ -14,7 +14,7 @@
 <body>
     <?php
         require_once("config.php");
-        
+        require_once("session.php");
         //session_regenerate_id();
         //echo session_id();
         // var_dump(session_status());
@@ -85,14 +85,16 @@
                     color: white;
                     font-family: Courier;">
                     <h1>CAD_UNO</h1>
-                    <h6>cadastro de alunos</h6>
+                    <h6>Cadastro de alunos</h6>
+                    <h6>Seja bem vindo <kbd><?php echo $_SESSION['usuario'];?></kbd></h6>
         </div>
         <div class="btn-group" style="margin-top:20px;
                     float:right;
-                    color:white;">
-            <a href="cadastroEscola.php"  class="btn btn-group-lg btn-light">Ínicio</a>
+                    color:white;">  
+            <a href="pages\cadastroEscola.php"  class="btn btn-group-lg btn-light">Ínicio</a>
             <a href="#"  class="btn btn-group-lg btn-light">Sobre a Empresa</a>
             <a href="#"  class="btn btn-group-lg btn-light">Fale Conosco</a>
+            <a href="deslogar.php" class="btn btn-group-lg btn-light">Deslogar</a>
         </div>
     </nav>
 
@@ -159,6 +161,9 @@
 
 </body>
 </html>
+<?php
 
+
+?>
 
 
