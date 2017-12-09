@@ -1,0 +1,43 @@
+#icon{
+    width: 20px;
+}
+
+#footer{
+    background-color: #076EB2;
+}
+
+#head{
+    background-color: #076EB2;
+}
+
+.itens.container{
+    width: 50%;
+    height: auto;
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    border:2px solid #076EB2;
+}
+
+.mainContainer{
+    margin-top: 50px;
+    width: 98vw;
+    height:auto;
+    /* background: #6C7A89; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.alunoBody{
+    margin: 0px;
+    /* background: #6C7A89; */
+}
+
+.newAluno{
+    position: absolute;
+    left: 10px;
+   top: 100px;
+}

@@ -54,7 +54,7 @@
     // Nova Escola
     if(isset($_POST["newAluno"])){
         try{
-            $aluno = new Escola($_POST["name"],$_POST["end"],$_POST["tel"]);
+            $aluno = new Aluno($_POST["name"],$_POST["end"],$_POST["tel"]);
             getImage();
             
             $escola->insert();

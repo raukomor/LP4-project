@@ -9,9 +9,11 @@
     <!-- imports -->
     <script src="../src/bootstrap/js/jquery-3.2.1.min.js" ></script>
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <script src="../src/bootstrap/js/bootstrap.js" ></script>
 
+    <link rel="stylesheet" href="../src/style.css">
     <script src="../js/alunoServices.js" defer="defer" ></script>
     <script src="../js/appAluno.js" defer="defer" ></script>
    
@@ -19,16 +21,21 @@
 
 
 </head>
-<body>
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal">
-Launch demo modal
-</button> -->
+<body class="alunoBody">
 
-<div class="container" id="alunos">
+<?php include "header.php"; ?>
 
+
+<!--Button trigger modal -->
+<button type="button" class="btn btn-primary newAluno" data-toggle="modal" data-target="#cadastroModal">
+    +Aluno
+</button>
+
+
+
+<div class="mainContainer" id="alunos">
+    
 </div>
-
 
 
 <!-- Modal Cadastro-->
@@ -105,5 +112,6 @@ Launch demo modal
     </div>
 </div>
 
+<?php include "footer.php" ?> 
 </body>
 </html>

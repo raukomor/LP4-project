@@ -91,23 +91,52 @@ function GetAllAlunos(){
                 //     console.log(data[i].cd_telefone_escola);
                 // }
                 console.log(data);
+                
                 $.each(data, function(i, d) {
                     var area = $("#alunos");
                     area.append(
-                     "<div class='row'>" +
-                     "<div class='col'>" + d.nm_aluno + "</div>" +
-                     "<div class='col'>" + d.cd_cpf_aluno + "</div>" +
-                     "<div class='col'>" + d.dt_nascimento_aluno + "</div>" +
-                     "<div class='col'>" + d.nm_endereco_aluno + "</div>" +
-                     "<div class='col'>" + d.cd_telefone_aluno + "</div>" +
-                     "<div class='col'>" + d.cd_escola + "</div>" +
-                     "<div class='col'>" + d.cd_turma + "</div>" +
-                     "<div class='col'>" + d.dt_matricula + "</div>" +
-                     "<div class='col'>" + d.cd_senha + "</div>" +
-                     "<div class='col'><input type='submit' class='btn btn-primary' name='' value='editar'/></div>" +
-                     "<div class='col'><input type='submit' class='btn btn-primary' name='' value='excluir'/></div>" +
-                     "</div>"
+                        "<div class='itens container'>"+
+                        "<div class='row'>" +
+                            "<div class='col-12'>Nome: " + d.nm_aluno + "</div>" +
+                            "<div class='col-12'>CPF: " + d.cd_cpf_aluno + "</div>" +
+                            "<div class='col-12'>Data de Nascimento: " + d.dt_nascimento_aluno + "</div>" +
+                            "<div class='col-12'>Endereço: " + d.nm_endereco_aluno + "</div>" +
+                            "<div class='col-12'>Telefone: " + d.cd_telefone_aluno + "</div>" +
+                            "<div class='col-12'>Código da Escola: " + d.cd_escola + "</div>" +
+                            "<div class='col-12'>Código da Turma: " + d.cd_turma + "</div>" +
+                            "<div class='col-12'>Data de Matricula: " + d.dt_matricula + "</div>" +
+                            "<div class='col-12'>" + d.cd_senha + "</div>" +
+                            
+                            "<form action='' method='post'>" +
+                                "<input type='hidden' name='action' value='edit'/>"+
+                                "<input type='hidden' name='cd_aluno' value='" + d.cd_cpf_aluno + "'/>"+
+                                "<div class='col-6'><input type='submit' class='btn btn-primary edit'  value='editar'/></div>" +
+                            "</form>"+
+                            
+                            "<form action='' method='post'>" +
+                                "<input type='hidden' name='action' value='delete'/>"+
+                                "<input type='hidden' name='cd_aluno' value='" + d.cd_cpf_aluno + "'/>"+
+                                "<div class='col-6'><input type='submit' class='btn btn-primary' value='excluir'/></div>" +
+                            "</form>"+
+                    "</div>"+
+                    "</div>"+
+                    "<br>"
                     );
+                });
+
+                //adicionando observers aos botões de edit e excluir
+                $( "form" ).submit(function( event ) {
+                    console.log($(this).find("input:first").val());
+                    var formDados = $(this).serialize();
+                    if($(this).find("input:first").val() == "edit"){
+                        console.log(formDados);
+                    }
+
+                    if($(this).find("input:first").val() == "delete"){
+                        console.log(formDados);   
+                    }
+
+                    event.preventDefault();
                 });
             }
         }

@@ -1,3 +1,14 @@
 $( document ).ready(function() {
     GetAllAlunos();
-});
+})
+    
+
+
+
+
+
+   
+
+
+
+    
