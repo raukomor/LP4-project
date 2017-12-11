@@ -76,8 +76,8 @@ function GetAllAlunos(){
         beforeSend: function(){
             console.log("carregando");
         },
-        error: function(){
-            console.log("problema com a fonte de dados");
+        error: function(ex){
+            console.log(ex.responseText);
         },
         success: function(data){
             if(data.erro){
@@ -97,6 +97,7 @@ function GetAllAlunos(){
                     area.append(
                         "<div class='itens container'>"+
                         "<div class='row'>" +
+                            "<div class='col-12'><img src='"+ d.im_perfil + "' class='rounded' alt='Imagem de Perfil'></div>" +
                             "<div class='col-12'>Nome: " + d.nm_aluno + "</div>" +
                             "<div class='col-12'>CPF: " + d.cd_cpf_aluno + "</div>" +
                             "<div class='col-12'>Data de Nascimento: " + d.dt_nascimento_aluno + "</div>" +
@@ -110,7 +111,7 @@ function GetAllAlunos(){
                             "<form action='' method='post'>" +
                                 "<input type='hidden' name='action' value='edit'/>"+
                                 "<input type='hidden' name='cd_aluno' value='" + d.cd_cpf_aluno + "'/>"+
-                                "<div class='col-6'><input type='submit' class='btn btn-primary edit'  value='editar'/></div>" +
+                                "<div class='col-6'><input type='submit' class='btn btn-primary '  value='editar'/></div>" +
                             "</form>"+
                             
                             "<form action='' method='post'>" +
@@ -126,13 +127,13 @@ function GetAllAlunos(){
 
                 //adicionando observers aos botões de edit e excluir
                 $( "form" ).submit(function( event ) {
-                    console.log($(this).find("input:first").val());
+                    //console.log($(this).find("input:first").val());
                     var formDados = $(this).serialize();
-                    if($(this).find("input:first").val() == "edit"){
+                    if($(this).find("input[type=hidden]:first").val() == "edit"){
                         console.log(formDados);
                     }
 
-                    if($(this).find("input:first").val() == "delete"){
+                    if($(this).find("input[type=hidden]:first").val() == "delete"){
                         console.log(formDados);   
                     }
 
@@ -177,10 +178,38 @@ function SearchEscolaByName(name){
     });
 };
 
-//Inserir na tabela escola
-function newEscola(formDados){
-    var url = "../services/escolaService.php";
-    console.log(url);
+//Inserir na tabela aluno
+function newAluno(formdata,formDados){
+    var url = "../services/alunoService.php";
+    
+    $.ajax({
+        url: url,
+        type: "POST",
+        contentType: false,
+        processData: false,
+        data: formdata,formDados,
+        cache: false,
+        beforeSend: function(){
+            console.log("carregando");
+        },
+        error: function(ex){
+            console.log(ex.responseText);
+        },
+        success: function(data){
+            if(data.erro){
+                alert("Erro ao cadastrar o aluno");
+            }else{
+                alert("Aluno cadastrado com sucesso");
+            }
+           
+            //$(location).attr('href', '/LP4-project');
+            $('#newAluno')[0].reset();
+            $('#cadastroModal').modal('toggle');
+            $('#alunos').empty();
+            GetAllAlunos();
+        } 
+    });
+
     $.ajax({
         method: "POST",
         url: url,
@@ -196,8 +225,8 @@ function newEscola(formDados){
         beforeSend: function(){
             console.log("carregando");
         },
-        error: function(){
-            console.log("problema com a fonte de dados");
+        error: function(ex){
+            console.log(ex.responseText);
         },
         success: function(data){
             if(data.erro){
@@ -206,7 +235,7 @@ function newEscola(formDados){
                 alert(data.success);
             }
            
-            $(location).attr('href', '/LP4-project');
+            // $(location).attr('href', '/LP4-project');
         }
 
     });

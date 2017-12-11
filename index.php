@@ -80,23 +80,8 @@
 
     ?>
     
-    <nav class="navbar-dark container-fluid" style="content: '';clear: both; display:table;" id="head" >
-        <div style="float:left;
-                    color: white;
-                    font-family: Courier;">
-                    <h1>CAD_UNO</h1>
-                    <h6>Cadastro de alunos</h6>
-                    <h6>Seja bem vindo <kbd><?php echo $_SESSION['usuario'];?></kbd></h6>
-        </div>
-        <div class="btn-group" style="margin-top:20px;
-                    float:right;
-                    color:white;">  
-            <a href="pages\cadastroEscola.php"  class="btn btn-group-lg btn-light">Ínicio</a>
-            <a href="#"  class="btn btn-group-lg btn-light">Sobre a Empresa</a>
-            <a href="#"  class="btn btn-group-lg btn-light">Fale Conosco</a>
-            <a href="deslogar.php" class="btn btn-group-lg btn-light">Deslogar</a>
-        </div>
-    </nav>
+    <!--Header  -->
+    <?php include "pages/header.php"; ?>
 
     <div class="container " >
         <div>
@@ -124,40 +109,8 @@
         </div>
     </div>
 
-    <footer id="footer">
-        <div class="" style="color: white;" > 
-            <div style="text-align: center;">
-                CADASTRO DE ALUNOS © Copyright 2017 - 2018
-                <br>
-            </div>
-            <!--<div >
-            <div class="row">
-                <div class="col-2">Fabio da Silva Araujo</div>
-                <div class="col"><a href="http://facebook.com/astrofabin">
-                    <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
-                    </a></div>
-            </div>
-            <div class="row">
-                <div class="col-2">Jefferson Costa Gomes</div>
-                <div class="col"><a href="http://facebook.com/astrofabin">
-                    <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
-                    </a></div>
-            </div>
-            <div class="row">
-                <div class="col-2">Rodrigo Corneta</div>
-                <div class="col"><a href="http://facebook.com/astrofabin">
-                    <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
-                    </a></div>
-            </div>
-            <div class="row">
-                <div class="col-2">Vitor Jesus</div>
-                <div class="col"><a href="http://facebook.com/astrofabin">
-                    <img src="https://image.flaticon.com/icons/png/128/25/25305.png" id="icon">
-                    </a></div>
-            </div>
-            </div>
-        </div>-->
-    </footer>
+    <!-- footer -->
+    <?php include "pages/footer.php" ?> 
 
 </body>
 </html>

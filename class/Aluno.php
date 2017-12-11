@@ -31,10 +31,7 @@
         }
 
         public function setIm_perfil($value){
-            
-            
-            
-            //$this->im_perfil = $value;
+            $this->im_perfil = $value;
         }
         
         public function getCd_escola(){

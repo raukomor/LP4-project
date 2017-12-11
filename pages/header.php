@@ -9,7 +9,8 @@
         <div class="btn-group" style="margin-top:20px;
                     float:right;
                     color:white;">  
-            <a href="pages\cadastroEscola.php"  class="btn btn-group-lg btn-light">Ínicio</a>
+            <a href="..\index.php"  class="btn btn-group-lg btn-light">Ínicio</a>
+            <a href="pages\aluno.php"  class="btn btn-group-lg btn-light">Alunos</a>
             <a href="#"  class="btn btn-group-lg btn-light">Sobre a Empresa</a>
             <a href="#"  class="btn btn-group-lg btn-light">Fale Conosco</a>
             <a href="deslogar.php" class="btn btn-group-lg btn-light">Deslogar</a>
