@@ -13,9 +13,10 @@
 
 <body>
     <?php
+    include("protect.php");
+    protect();
         require_once("config.php");
-        require_once("session.php");
-        //session_regenerate_id();
+      //session_regenerate_id();
         //echo session_id();
         // var_dump(session_status());
         // echo "<br>";

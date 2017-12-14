@@ -1,4 +1,42 @@
 
+
+<?php
+
+include("session.php");
+
+if(isset($_POST['usuario'])){
+
+    if(!isset($_SESSION))
+        session_start();
+
+   $_SESSION['usuario'] = $_POST['usuario'];
+    $_SESSION['senha'] = $_POST['senha'];
+
+    $sql_code = "SELECT nm_acc, nm_pass_acc FROM user_admin WHERE nm_acc = '$_SESSION[usuario]'";
+    $sql_query = $mysqli->query($sql_code) or die($mysqli->error);
+    $dado = $sql_query->fetch_assoc();
+    $total = $sql_query->num_rows;
+
+
+    if($total==0){
+        $erro[] =  "Conta não existe";
+      }else{
+
+             if($dado['nm_pass_acc'] == $_SESSION['senha']){
+              $_SESSION['admin'] = $dado['nm_acc'];
+              }else{
+
+                $erro[] = "Senha incorreta";
+            }
+
+        }
+
+        if(count($erro) == 0 || !isset($erro)){
+            echo "<script>alert('Login efetuado com sucesso'); location.href='index.php';</script>";
+        } 
+    }
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,7 +57,7 @@
     <div class="card text-white bg-primary mb-3" style="max-width: 20rem;margin: 0 auto;margin-top: 50px;">
         <div class="card-body">
             <h1 class="display-4 text-center" style="font-family: Courier">Login_</h1>
-            <form action="index.php" method="post">
+            <form action="" method="post">
                 <div class="form-group">
                     <label for="loginUsuario">Usuário</label>
                     <input type="text" name="usuario" class="form-control" id="loginUsuario" placeholder="Digite seu nome de usuário">

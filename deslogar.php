@@ -1,7 +1,5 @@
 <?php
-
-session_destroy();
-
-
-
+session_start();
+unset($_SESSION['admin']);
 ?>
+<script>location.href='telalogin.php';</script>
