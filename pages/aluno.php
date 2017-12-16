@@ -50,42 +50,45 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Nome</label>
-                        <input type="text" class="form-control" name="nome" id="">
+                        <input type="text" class="form-control" name="nome" >
                     </div>
                     
                     <div class="form-group">
                         <label for="">CPF</label>
-                        <input type="text" class="form-control" name="cpf" id="">
+                        <input type="text" class="form-control" name="cpf" >
                     </div>
                     
                     <div class="form-group">
                         <label for="">Data de Nascimento</label>
-                        <input type="date" class="form-control" name="dataNasc" id="">
+                        <input type="date" class="form-control" name="dataNasc" >
                     </div>
                     
                     <div class="form-group">
                         <label for="">Endereco</label>
-                        <input type="text" class="form-control" name="enderec" id="">
+                        <input type="text" class="form-control" name="enderec" >
                     </div>
                     
                     <div class="form-group">
                         <label for="">Telefone</label>
-                        <input type="text" class="form-control" name="tel" id="">
+                        <input type="text" class="form-control" name="tel" >
                     </div>
                     
                     <div class="form-group">
-                        <label for="">Código da sala</label>
-                        <input type="text" class="form-control" name="cdSala" id="">
-                    </div>
+                    <label for="">escola</label>
+                    <!-- <input type="text" class="form-control" name="cdSala" > -->
+                    <select name="cdSala" class="dropEscola">
+                    
+                    </select>
+                </div>
                     
                     <div class="form-group">
                         <label for="">Codigo da turma</label>
-                        <input type="text" class="form-control" name="cdTurma" id="">
+                        <input type="text" class="form-control" name="cdTurma" >
                     </div>
                     
                     <div class="form-group">
                         <label for="">Senha</label>
-                        <input type="password" class="form-control" name="pass" id="">
+                        <input type="password" class="form-control" name="pass" >
                     </div>
                         
                     <input type="hidden" name="newAluno" value="newAluno">
@@ -100,12 +103,88 @@
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" id="" class="btn btn-primary" value="Cadastrar">
+                    <input type="submit"  class="btn btn-primary" value="Cadastrar">
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Modal Edição de Cadastro-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Edição Aluno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="POST" action="" id="editaAluno" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Nome</label>
+                        <input type="text" class="form-control" name="nome" >
+                    </div>
+                    
+                    <!-- <div class="form-group">
+                        <label for="">CPF</label>
+                        <input type="text" class="form-control" name="cpf" >
+                    </div> -->
+                    
+                    <div class="form-group">
+                        <label for="">Data de Nascimento</label>
+                        <input type="date" class="form-control" name="dataNasc" >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="">Endereco</label>
+                        <input type="text" class="form-control" name="enderec" >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="">Telefone</label>
+                        <input type="text" class="form-control" name="tel" >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="">escola</label>
+                        <!-- <input type="text" class="form-control" name="cdSala" > -->
+                        <select name="cdSala" class="dropEscola">
+                        
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="">Codigo da turma</label>
+                        <input type="text" class="form-control" name="cdTurma" >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="">Senha</label>
+                        <input type="password" class="form-control" name="pass" >
+                    </div>
+                        
+                    <input type="hidden" class="editAluno" name="editAluno" value="">
+
+                
+                    <div class="form-group">
+                        <label for="exampleInputFile">Imagem de Perfil</label>
+                        <input type="file" class="form-control-file"  name="arquivo" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">Selecione apenas uma foto para o perfil do aluno.</small>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit"  class="btn btn-primary" value="Cadastrar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <!-- footer -->
 <?php include "footer.php" ?> 

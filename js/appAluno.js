@@ -13,4 +13,19 @@ $( document ).ready(function() {
                 
         newAluno(formdata,formDados);
     });
+
+    $('#editaAluno').on('submit',function(e) {
+        e.preventDefault();
+        
+        var formDados = $("#data").serialize();
+        var form = $(this);
+        
+        var formdata = new FormData(form[0]);
+                
+        editAluno(formdata,formDados);
+    });
+
+    
+
+    
 });

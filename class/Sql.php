@@ -25,6 +25,7 @@
             try {
                 $this->conn = new PDO($type.":dbname=".$name.";host=".$host,$user,$pass);
                 
+                
             } catch (PDOException $e) {
                 echo 'Connection failed: ' .$e->getMessage() ;
                 

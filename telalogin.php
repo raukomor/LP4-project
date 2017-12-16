@@ -18,7 +18,7 @@ if(isset($_POST['usuario'])){
     $total = $sql_query->num_rows;
 
 
-    if($total==0){
+    if($total.length == 0){
         $erro[] =  "Conta não existe";
       }else{
 

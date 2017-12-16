@@ -181,7 +181,7 @@
             $this->setDt_matricula($dt_matricula);
             $this->setCd_senha($cd_senha);
 
-            $sql->query("UPDATE aluno SET nm_aluno = :NM_ALUNO , dt_nascimento_aluno = :DT_NASCIMENTO , nm_endereco_aluno = :NM_ENDERECO , cd_telefone_aluno = :CD_TELEFONE , im_perfil = :IM_PERFIL , cd_escola = :CD_ESCOLA , cd_turma = :CD_TURMA , dt_matricula = :NOW() , cd_senha = :CD_SENHA  WHERE cd_cpf_aluno = :CD_CPF", array(
+            $sql->query("UPDATE aluno SET nm_aluno = :NM_ALUNO , dt_nascimento_aluno = :DT_NASCIMENTO , nm_endereco_aluno = :NM_ENDERECO , cd_telefone_aluno = :CD_TELEFONE , im_perfil = :IM_PERFIL , cd_escola = :CD_ESCOLA , cd_turma = :CD_TURMA , dt_matricula = NOW() , cd_senha = :CD_SENHA  WHERE cd_cpf_aluno = :CD_CPF", array(
                 "CD_CPF"=>$this->getCd_cpf(),
                 "NM_ALUNO"=>$this->getNm_Pessoa(),
                 "DT_NASCIMENTO"=>$this->getDt_nascimento(),
@@ -195,26 +195,33 @@
             ));
         }
 
-        public function delete($cd_cpf_aluno){
+        public static function delete($cd_cpf_aluno){
             $sql = new Sql();
-            
-            $this->loadById($cd_cpf_aluno);
+            $aluno = new Aluno();
+            $aluno->loadById($cd_cpf_aluno);
 
             $sql->query("DELETE FROM aluno WHERE cd_cpf_aluno = :CD_CPF", array(
-                ":CD_CPF"=>$this->getCd_cpf()
+                ":CD_CPF"=>$aluno->getCd_cpf()
             ));
 
-            $this->setCd_cpf(null);
-            $this->setNm_pessoa("");
-            $this->setDt_nascimento("");
-            $this->setNm_endereco("");
-            $this->setCd_telefone(null);
-            $this->setIm_perfil("");
-            $this->setCd_escola(null);
-            $this->setCd_turma(null);
-            $this->setDt_matricula("");
-            $this->setCd_senha(null);    
+            // $this->setCd_cpf(null);
+            // $this->setNm_pessoa("");
+            // $this->setDt_nascimento("");
+            // $this->setNm_endereco("");
+            // $this->setCd_telefone(null);
+            // $this->setIm_perfil("");
+            // $this->setCd_escola(null);
+            // $this->setCd_turma(null);
+            // $this->setDt_matricula("");
+            // $this->setCd_senha(null);    
 
+        }
+
+        public static function getEscolas(){
+            $sql = new Sql();
+            
+            return $sql->select("SELECT cd_escola, nm_escola FROM escola "
+            );
         }
     }
 

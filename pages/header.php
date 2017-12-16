@@ -5,7 +5,7 @@
                     font-family: Courier;">
                     <h1>CAD_UNO</h1>
                     <h6>Cadastro de alunos</h6>
-                     <h6>Seja bem vindo <kbd><?php echo $_SESSION['admin'];?></kbd></h6>
+                     <h6>Seja bem vindo <kbd><?php if(!isset($_SESSION)){session_start();} echo $_SESSION['admin']?></kbd></h6>
         </div>
         <div class="btn-group" style="margin-top:20px;
                     float:right;

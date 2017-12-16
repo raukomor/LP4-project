@@ -23,42 +23,47 @@ function GetEscolaById(formDados){
 };
 
 //Select na tabela escola para a edição
-function GetEscolaForEdit(formDados){
-    var url = "../services/escolaService.php";
-    console.log(url);
+function GetAlunoForEdit(id){
+    var url = "../services/alunoService.php";
+    console.log(id);
     $.ajax({
         method: "POST",
         url: url,
-        data: formDados,//{ relatorioCode: code},
+        data: {relatorioCode: id},//{ relatorioCode: code},
         cache: false,
         dataType: "json",
         beforeSend: function(){
             console.log("carregando");
         },
-        error: function(){
-            console.log("problema com a fonte de dados");
+        error: function(ex){
+            console.log(ex.responseText);
         },
-        success: function(data){},         
-        complete: function(data){
-            
-            var dados = data.responseJSON; 
-            if(dados.erro){
-                alert(dados.erro);
+        success: function(data){
+            if(data.erro){
+                alert(data.erro);
             }
             else{
-                $("#editEscola").css("display", "block");
-                $("#selectEscolaForUpdate").css("display", "none");
                 
                 var formElements = new Array();
-                $("#editEscola :input").each(function(){
+                $("#editaAluno :input").each(function(){
                     formElements.push($(this));
                 });
                 
-                formElements[0].val(dados.nm_escola); 
-                formElements[1].val(dados.nm_endereco_escola); 
-                formElements[2].val(dados.cd_telefone_escola); 
-                formElements[3].val($('#selectEscolaForUpdate').find('#code').val());
+                
+                formElements[0].val(data.nm_aluno); 
+                formElements[1].val(data.dt_nascimento); 
+                formElements[2].val(data.nm_endereco); 
+                formElements[3].val(data.cd_telefone); 
+                formElements[4].val(data.cd_escola); 
+                formElements[5].val(data.cd_turma); 
+                formElements[6].val(data.cd_senha); 
+                formElements[7].val(data.im_perfil); 
             }
+        },         
+        complete: function(data){
+            
+            var dados = data.responseJSON; 
+            
         }
     });
 };
@@ -106,17 +111,16 @@ function GetAllAlunos(){
                             "<div class='col-12'>Código da Escola: " + d.cd_escola + "</div>" +
                             "<div class='col-12'>Código da Turma: " + d.cd_turma + "</div>" +
                             "<div class='col-12'>Data de Matricula: " + d.dt_matricula + "</div>" +
-                            "<div class='col-12'>" + d.cd_senha + "</div>" +
+                            // "<div class='col-12'>" + d.cd_senha + "</div>" +
                             
-                            "<form action='' method='post'>" +
-                                "<input type='hidden' name='action' value='edit'/>"+
-                                "<input type='hidden' name='cd_aluno' value='" + d.cd_cpf_aluno + "'/>"+
-                                "<div class='col-6'><input type='submit' class='btn btn-primary '  value='editar'/></div>" +
-                            "</form>"+
+                            // "<form action='' method='post'>" +
+                            //     "<input type='hidden' name='action' value='edit'/>"+
+                            //     "<input type='hidden' name='cd_aluno' id='cd_aluno' value='" + d.cd_cpf_aluno + "'/>"+
+                                "<div class='col-6'><button type='button'  class='btn btn-primary editCodeAluno' data-toggle='modal' data-target='#editModal' value='" + d.cd_cpf_aluno + "'>Editar</button></div>" +
+                            // "</form>"+
                             
-                            "<form action='' method='post'>" +
-                                "<input type='hidden' name='action' value='delete'/>"+
-                                "<input type='hidden' name='cd_aluno' value='" + d.cd_cpf_aluno + "'/>"+
+                            "<form action='' class='excludeAluno' method='post'>" +
+                                "<input type='hidden' name='deleteAluno' value='" + d.cd_cpf_aluno + "'/>"+
                                 "<div class='col-6'><input type='submit' class='btn btn-primary' value='excluir'/></div>" +
                             "</form>"+
                     "</div>"+
@@ -138,6 +142,19 @@ function GetAllAlunos(){
                     }
 
                     event.preventDefault();
+                });
+
+                $('.editCodeAluno').on('click', function(){
+                    $('.editAluno').val($(this).val());
+                    GetAlunoForEdit($(this).val());
+                });
+
+                $('.excludeAluno').on('submit',function(e) {
+                    e.preventDefault();
+                    
+                    var formDados = $(".excludeAluno").serialize();
+                            
+                    deleteAluno(formDados);
                 });
             }
         }
@@ -210,18 +227,80 @@ function newAluno(formdata,formDados){
         } 
     });
 
+    // $.ajax({
+    //     method: "POST",
+    //     url: url,
+    //     data: formDados,/*{ 
+    //         newEscola: newEscola, 
+    //         name: name,
+    //         end: end,
+    //         tel: tel
+    //     },*/
+    //     cache: false,
+    //     dataType: "json",
+       
+    //     beforeSend: function(){
+    //         console.log("carregando");
+    //     },
+    //     error: function(ex){
+    //         console.log(ex.responseText);
+    //     },
+    //     success: function(data){
+    //         if(data.erro){
+    //             alert(data.erro);
+    //         }else{
+    //             alert(data.success);
+    //         }
+           
+    //         // $(location).attr('href', '/LP4-project');
+    //     }
+
+    // });
+};
+
+//Editar Cadastro da tabela escola
+function editAluno(formdata,formDados){
+    var url = "../services/alunoService.php";
+    // var url = "../services/img.php";
+    $.ajax({
+        url: url,
+        type: "POST",
+        contentType: false,
+        processData: false,
+        data: formdata,formDados,
+        cache: false,
+        beforeSend: function(){
+            console.log("carregando");
+        },
+        error: function(ex){
+            console.log(ex.responseText);
+        },
+        success: function(data){
+            if(data.erro){
+                alert("Erro ao Editar o aluno");
+            }else{
+                alert("Aluno Alterado com sucesso");
+            }
+            console.log(data);
+            //$(location).attr('href', '/LP4-project');
+            $('#editaAluno')[0].reset();
+            $('#editModal').modal('toggle');
+            $('#alunos').empty();
+            GetAllAlunos();
+        } 
+    });
+};
+
+//Excluir Cadastro de aluno
+function deleteAluno(formDados){
+    var url = "../services/alunoService.php";
+    console.log(url);
     $.ajax({
         method: "POST",
         url: url,
-        data: formDados,/*{ 
-            newEscola: newEscola, 
-            name: name,
-            end: end,
-            tel: tel
-        },*/
+        data: formDados,
         cache: false,
         dataType: "json",
-       
         beforeSend: function(){
             console.log("carregando");
         },
@@ -235,69 +314,54 @@ function newAluno(formdata,formDados){
                 alert(data.success);
             }
            
-            // $(location).attr('href', '/LP4-project');
+            $('#alunos').empty();
+            GetAllAlunos();
+           
         }
 
     });
 };
 
-//Editar Cadastro da tabela escola
-function editEscola(formDados){
-    var url = "../services/escolaService.php";
+
+function getEscolas(){
+    var url = "../services/alunoService.php";
     console.log(url);
     $.ajax({
         method: "POST",
         url: url,
-        data: formDados,
+        data: {getEscolas: "getEscolas"},
         cache: false,
         dataType: "json",
         beforeSend: function(){
             console.log("carregando");
         },
-        error: function(){
-            console.log("problema com a fonte de dados");
+        error: function(ex){
+            console.log(ex.responseText);
         },
         success: function(data){
             if(data.erro){
                 alert(data.erro);
             }else{
-                alert(data.success);
+                console.log(data);
+                
+                $.each(data, function(i, d) {
+                    var dropdown = $("<option></option>");
+                    dropdown.text(d.nm_escola);
+                    dropdown.val(d.cd_escola);
+                    $(".dropEscola").append(dropdown);
+                });
+                
+                //$('#alunos').empty();
+                //GetAllAlunos();
             }
-           
-            $(location).attr('href', '/LP4-project');
-           
         }
+    
 
     });
-};
+}
 
-//Excluir Cadastro da tabela escola
-function deleteEscola(formDados){
-    var url = "../services/escolaService.php";
-    console.log(url);
-    $.ajax({
-        method: "POST",
-        url: url,
-        data: formDados,
-        cache: false,
-        dataType: "json",
-        beforeSend: function(){
-            console.log("carregando");
-        },
-        error: function(){
-            console.log("problema com a fonte de dados");
-        },
-        success: function(data){
-            if(data.erro){
-                alert(data.erro);
-            }else{
-                alert(data.success);
-            }
-           
-            $(location).attr('href', '/LP4-project');
-           
-        }
 
-    });
-};
 
+$(document).ready(function(){
+    getEscolas();
+})
