@@ -185,7 +185,10 @@
     </div>
 </div>
 
-
+<div class="loc">
+    <h2>Localização de alguns alunos</h2>
+    <img id="location" src="https://maps.googleapis.com/maps/api/staticmap?center=-24.005206,+-46.412855&zoom=14&scale=1&size=600x300&maptype=roadmap&key=AIzaSyCuwpEbn_6HE6KAttNQ4rBV53yJI8OY1n4&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:0%7C-24.005206,+-46.412855&markers=size:mid%7Ccolor:0x0000ff%7Clabel:1%7C-24.003902,+-46.417565&markers=size:mid%7Ccolor:0x00ff40%7Clabel:2%7C-24.016564,+-46.393532">
+</div>
 <!-- footer -->
 <?php include "footer.php" ?> 
 </body>

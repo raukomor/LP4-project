@@ -1,3 +1,7 @@
+body{
+    overflow-x: hidden;
+}
+
 #icon{
     width: 20px;
 }
@@ -56,4 +60,27 @@
     display: block;
     padding-left: 170px;
     
+}
+
+.loc{
+    margin: auto;
+    width: 50%;
+    /* border: 3px solid green; */
+    padding: 10px;
+    position: relative;
+    bottom: 3em;
+    left:5em;
+    padding-top: 50px;
+
+    
+}
+
+#footer {
+    /* clear: both; */
+    position:relative;
+    bottom:0;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+    width: 100vw;
 }
